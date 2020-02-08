@@ -1,8 +1,34 @@
-#Вывести на консоль своё имя, нарисованное 'звёздочками'. Для выполнения этого задания надо использовать не только
-#символы звёздочки и пробела, но и ESCAPE символы: \n и \t
+"""1.Вывести на консоль своё имя, нарисованное 'звёздочками'. Для выполнения этого задания надо использовать не только
+символы звёздочки и пробела, но и ESCAPE символы: \n и \t"""
+
 print("***  ***\t***  ***\t **** \t***   ***\t   **   \n *    * \t *    * \t*    *\t *     * \t  *  *  \n **   * \t *    * \t*    *\t  *   *  \t *    * \n * *  * \t *    * \t **   \t   * *   \t *    * \n *  * * \t *    * \t   ** \t    *    \t ****** \n *   ** \t *    * \t*    *\t    *    \t *    * \n *    * \t *    * \t*    *\t    *    \t *    * \n***  ***\t  ****  \t **** \t   ***   \t***  ***\n")
 
 
-#Написать программу, которая выводит в консоль таблицу Escape-последовательностей:
+
+"""2.Написать программу, которая выводит в консоль таблицу Escape-последовательностей:"""
 
 print('Escape sequences\n\\a\t\tBell (alert)\n\\b\t\tBackspace\n\\n\t\tNew line\n\\t\t\tHorizontal tab\n\\\\\t\tBackslash \\\n\\"\t\tDouble quotation mark \"\n\\\'\t\tSingle quotation mark \'')
+
+
+
+"""3.Напишите программу, которая считывает целое число и выводит текст, аналогичный приведенному в примере
+(пробелы важны!). Первая строка содержит следующее значение, а втора строка содержит предыдущее значение введёного
+числа
+
+Пример вывода:
+
+Please enter an integer number: 1234
+The next number for the number 1234 is 1235.
+The previous number for the number 1234 is 1233.
+
+или
+
+Please enter an integer number: 0
+The next number for the number 0 is 1.
+The previous number for the number 0 is -1.
+
+Вывод программы должен соответствовать примеру!"""
+
+a=int(input('Please enter an integer number: '))
+print('The next number for the number {} is {}'.format(a,a+1))
+print('The previous number for the number {} is {}'.format(a,a-1))
