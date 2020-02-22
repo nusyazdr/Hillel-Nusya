@@ -59,5 +59,8 @@ while s.find(c, i) != -1:
 
 """
 s = str(input('Введите строку: '))
-s = s[0] + s[1:len(s)-1:].replace('h','H') + s[-1]
+first = s.find('h')
+last = s.rfind('h')
+s_repl = s.replace('h','H')
+s = s[:first+1:] + s_repl[first+1:last:] + s[last::]
 print(s)
