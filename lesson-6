@@ -1,4 +1,4 @@
-rows = int(input('Введите высоту фигуры: '))
+rows = int(input('Введите высоту фигуры A: '))
 x_max = int(rows*2)
 x_middle = int(x_max/2)
 
@@ -14,6 +14,9 @@ for y in range(int(rows)):
     print()
 print()
 
+rows = int(input('Введите высоту фигуры B: '))
+x_max = int(rows*2)
+x_middle = int(x_max/2)
 i = 0
 
 for y in range(int(rows)):
@@ -25,52 +28,54 @@ for y in range(int(rows)):
     i += 1
     print()
 print()
-
+rows = int(input('Введите высоту фигуры C: '))
+x_max = int(rows*2)
+x_middle = int(x_max/2)
 i = 0
 
-if rows % 2 == 0:
-    rows -= 1
-
-for y in range(int(rows)):
-    if y <= int(rows/2):
+for y in range(int(rows*2-1)):
+    if y < int(rows):
         for x in range(x_max):
             if x >= x_middle-i and x <= x_middle+i or (y == int(rows)-1 and x != 0):
                 print('* ', end='')
             else:
                 print('  ', end='')
+        i += 1
         print()
     else:
+        if y == int(rows):
+            i -= 2
+        else:
+            i -= 1
         for x in range(x_max):
             if x == x_middle-i or x == x_middle+i:
                 print('* ', end='')
             else:
                 print('  ', end='')
         print()
-    if y < int(rows / 2):
-        i += 1
-    else:
-        i -= 1
+
 print()
-
-i = 0
-
-for y in range(int(rows)):
-    if y <= int(rows/2):
+rows = int(input('Введите высоту фигуры D: '))
+x_max = int(rows*2)
+x_middle = int(x_max/2)
+for y in range(int(rows*2-1)):
+    if y < int(rows):
         for x in range(x_max):
             if x >= x_middle-i and x <= x_middle+i or (y == int(rows)-1 and x != 0):
                 print('* ', end='')
             else:
                 print('  ', end='')
+        i += 1
         print()
     else:
+        if y == int(rows):
+            i -= 2
+        else:
+            i -= 1
         for x in range(x_max):
             if x == x_middle-i or x == x_middle+i or x == x_middle:
                 print('* ', end='')
             else:
                 print('  ', end='')
         print()
-    if y < int(rows / 2):
-        i += 1
-    else:
-        i -= 1
-print()
+
