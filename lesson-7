@@ -18,18 +18,22 @@ print('Число различных элементов в множестве - 
 
 """
 
-s = input('Введите строку: ')
+s = input('Введите строку текста: ')
 
-t = tuple(item for item in s.split(' '))
+t = s.split() 
 
-thisdict = dict.fromkeys(t,0)
+thisdict = dict.fromkeys(t, 0) 
 
 for i in t:
 	for y in thisdict.keys():
 		if i == y:
 			thisdict[y] +=1
 
-print('Слово/к-во повторений', thisdict)
+print('Слова встречающиеся в этом тексте и сколько раз:')
+
+for y in thisdict.keys():
+    print('{} : '.format(y), end='')
+    print('{} раз.'.format(thisdict[y])) 
 """
 3. Дан текст состоящий из нескольких строки.
 Выведите слово, которое в этом тексте встречается чаще всего.
@@ -40,33 +44,34 @@ print('Слово/к-во повторений', thisdict)
 
 s = str()
 
-while s[-1::] != '!' and s[-2::] != '!': #Собираем строки в одну
+while s[-1::] != '!' and s[-2::] != '!': 
     s += input('Введите строку текста, в конце введите "!!": ')
 
-s = s[:-2:] #Удаляем знак выхода
+s = s[:-2:] 
 
-t = tuple(item for item in s.split(' '))# Собираем кортеж с словами
+t = s.split() 
 
-thisdict = dict.fromkeys(t, 0) # Собираем словарь где ключами являются слова с кортежа выше, а значение 0
+thisdict = dict.fromkeys(t, 0) 
 
 for i in t:
-	for y in thisdict.keys():
-		if i == y:
-			thisdict[y] +=1
+	for y in thisdict.keys(): 
+		if i == y: 
+			thisdict[y] +=1 
 
 print('Слова встречающиеся в этом тексте и сколько раз:')
 
-for y in thisdict.keys():
-    print('{} :'.format(y), end='')
-    print(thisdict[y])
+for y in thisdict.keys(): 
+    print('{} : '.format(y), end='') 
+    print('{} раз.'.format(thisdict[y])) 
 
-max = 0
-word = str()
+max = 0 
+word = str() 
 
-for y in thisdict.keys():
-    if thisdict[y] > max:
-        max = thisdict[y]
-        word = str(y)
+for y in thisdict.keys(): 
+    if thisdict[y] > max: 
+        max = thisdict[y] 
+        word = str(y) 
 
 print('Максимально встречаеться слово: {}'.format(word))
 print('Встречается сколько раз: {}'.format(max))
+
