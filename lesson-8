@@ -82,7 +82,7 @@ def get_season (in_month):
         for month in seasons[season]:
             if month == in_month:
                 return season
-    return 'Не такого месяца'
+    return 'Нет такого месяца'
 
 month = int(input('Enter the month number: '))
 print(get_season(month))
