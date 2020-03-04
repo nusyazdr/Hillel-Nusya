@@ -1,0 +1,85 @@
+"""
+9. Написать функцию для перевода десятичного числа в другую систему исчисления (2-36).
+Небольшая подсказка. В этой задаче вам понадобится:
+    - список
+    - метод `revers()` (или срез [::-1], или вместо `revers()` использовать `insert()` тогда не придётся разворачивать
+    список), чтоб развернуть список, метод `join()`
+    - строка `ascii_uppercase` из модуля `string` (её можно получить если сделать импорт `from string import
+    ascii_uppercase`), она содержит все буквы латинского алфавита.
+"""
+
+from string import ascii_uppercase
+from string import digits
+table = digits + ascii_uppercase
+
+def dec_to_base(N, base):
+    n = N
+    r = []
+    while n:
+        x, y = divmod(n, base)
+        r.append(table[y])
+        n = x
+    return ''.join(reversed(r))
+
+N = int(input('Enter number: '))
+base = int(input('Enter number base (2-36): '))
+w = dec_to_base(N, base)
+print(w)
+
+
+"""
+10. Написать функцию, циклически сдвигающую целое число на N разрядов вправо или влево, в зависимости от третьего
+параметра функции. Функция должна принимать три параметра: в первом параметре передаётся число для сдвига, второй
+параметр задаёт количество разрядов для сдвига (по умолчанию сдвиг на 1 разряд), 3-й булевский параметр задаёт
+направление сдвига (по умолчанию влево (False)).
+"""
+
+direction = bool()
+num = str(input('Введите число: '))
+i = input('Введите на сколько сдвинуть: ')
+
+if i == '':
+    i = 1
+else:
+    i = int(i)
+
+direct = str(input('Введите в какую сторону сдвинуть (0 - Влево, 1 - Вправо): '))
+
+if direct == '1':
+    direction = True
+else:
+    direction = False
+
+def shift(num, i, direction):
+    lst = list(num)
+    str = ''
+    if direction == True:
+        for t in range(i):
+            lst.insert(0, lst.pop())
+    else:
+        for t in range(i):
+            lst.append(lst.pop(0))
+    for c in lst:
+        str += c
+    return int(str)
+
+res = shift(num, i, direction)
+print("Сдвинутое число = {}".format(res))
+
+
+"""
+3. Реверс списка
+    - Принцип алгоритма заключается в следующем: мы меняем местами 0-ый элемент с последним, 1-ый с предпоследним и д.т.
+    - Итого количество таких обменов будет равно половине длины списка. Иначе элементы поменяются местами по-второму кругу
+и вернутся в первоначальное положение.
+"""
+num = input('Введите число: ')
+lst = list(num)
+
+def list_change(lst):
+    for k in range(int(len(lst)/2)):
+        lst.insert(k, lst.pop(len(lst)-k-1))
+        lst.insert(len(lst)-k-1, lst.pop(k+1))
+    return lst
+
+print('Результат - {}'.format(list_change(lst)))
