@@ -20,3 +20,19 @@ k = 6
 def del_element(lst_in, k_in):
     return [i for i in lst_in if i != [i for i in lst_in if i==lst_in[k_in]][0]]
 print(del_element(lst, k))
+
+
+"""3. Дан словарь ключами которого являются английские слова, а занчениями - списки латинских слов.
+Необходимо развеннуть словарь. Другими словани, необходимо, на основании заданного словаря, создать новый словарь,
+у которого в качестве ключей будут взяты латинские слова, из первого словаря, а значениями будут,
+соответствующие им, английские слова.
+"""
+d = {
+    	'apple': ['malum', 'pomum', 'popula'],
+    	'fruit': ['baca', 'bacca', 'popum'],
+    	'punishment': ['malum', 'multa']
+}
+
+ret = {item: key for key in d for item in d[key]}
+
+print(ret)
