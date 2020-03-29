@@ -1,0 +1,127 @@
+"""Написать функцию сортировки двухмерного списка МхМ (матрицы)
+Значение М - задаётся пользователем, с клавиатуры. Может быть любым
+целым, положительным числом, больше 5.
+Функция должна:
+1. найти сумму элементов столбцов и отсортировать столбцы по
+возрастанию этих сумм
+2. отсортировать каждый нечётный столбец по возрастанию значений снизу
+вверх, а каждый чётный столбец по возрастанию значений сверху вниз.
+Так же, ваша программа должна иметь функцию вывода данного списка
+на экран. При выводе, внизу каждого столбца должна выводиться сумма
+элементов этого столбца. 
+"""
+import random
+
+M = int(input('Введите M: '))
+
+Matr = [[random.randint(1,50) for i in range(M)] for y in range(M)]
+
+def sort_mas(Mart_in):
+    sumy = [0 for i in range(M)]  # 1 доп массив
+    for y in range(len(Matr)):
+        sumy = [sumy[index] + i for index, i in enumerate(Matr[y])]
+
+    for i in range(len(sumy) - 1):
+        for j in range(len(sumy) - i - 1):
+            if sumy[j] > sumy[j + 1]:
+                sumy[j], sumy[j + 1] = sumy[j + 1], sumy[j]
+                for y in range(len(Matr)):
+                    Mart_in[y][j], Mart_in[y][j + 1] = Mart_in[y][j + 1], Mart_in[y][j]
+
+    for x in range(len(Matr)):
+        for i in range(len(Matr) - 1):
+            for j in range(len(Matr) - i - 1):
+                if x%2 != 0:
+                    if Mart_in[j][x] > Mart_in[j +1 ][x]:
+                        Mart_in[j][x], Mart_in[j + 1][x] = Mart_in[j + 1][x], Mart_in[j][x]
+                else:
+                    if Mart_in[j][x] < Mart_in[j +1 ][x]:
+                        Mart_in[j][x], Mart_in[j + 1][x] = Mart_in[j + 1][x], Mart_in[j][x]
+
+    return Mart_in
+
+def print_mas(Mart_in):
+    sumy = [0 for i in range(M)]  # 1 доп массив
+    for y in range(len(Matr)):
+        sumy = [sumy[index] + i for index, i in enumerate(Matr[y])]
+        for x in Matr[y]:
+            print('{:<5}'.format(x), end='')
+        print('')
+    for x in sumy:
+        print('{:<5}'.format(x), end='')
+    return None
+
+print_mas(Matr)
+print()
+Matr =  sort_mas(Matr)
+print()
+print_mas(Matr)
+
+
+"""
+Вторая часть 
+"""
+
+file = open('in.txt', encoding='utf-8')
+
+text = []
+char = ''
+
+line_read = ' '
+
+while line_read != '':
+    line_read = file.readline()
+    text.append(line_read.split())
+
+sred = []
+
+for student in text:
+    sum=0
+    if student != []:
+        for i in range(2,14):
+            sum+=int(student[i])
+        sred.append(float("{0:.2f}".format(sum/12)))
+
+index = 0
+
+for b in sred:
+    if b < 5:
+        print('{:<20} Средний бал: {:<4}'.format('{} {}'.format(text[index][0], text[index][1]), b))
+    index+=1
+
+sum = 0
+for i in sred:
+    sum+=i
+print('Средний балл по классу: {}'.format(float("{0:.2f}".format(sum/len(sred)))))
+
+new_lst = []
+index = 0
+
+for student in text:
+    sum=0
+    if student != []:
+        new_lst.append('{:<20} {:<4}'.format('{} {}.'.format(student[1], student[0][0]), sred[index]))
+        index += 1
+
+file_wr = open('out.txt', 'w', encoding='utf-8')
+for line in new_lst:
+    file_wr.write(line)
+    file_wr.write('\n')
+
+file.close()
+file_wr.close()
+
+""in.txt""
+
+Андрей Говорухи               6  6  1  4  9  9  10 4  8  2  3  8
+Василий Петров                2  9  4  7  6  6  3  6  5  5  2  4
+Гавриил Варфаломеев           10 10 4  10 7  9  4  6  8  1  1  1
+Игнат Тюльпанов               8  1  4  1  1  5  2  5  2  2  10 8
+Илья Муромцев                 1  6  4  7  10 9  5  3  7  4  7  2
+Кощей Бессмертный             3  10 1  4  1  8  10 6  2  10 7  4
+Максим Мухин                  10 8  9  9  5  8  6  5  7  2  4  10
+Маргарита Мартынова           9  1  5  1  10 10 2  4  4  9  8  10
+Петр Николаев                 2  9  5  9  1  2  8  7  8  1  9  1
+Полина Гусева                 9  2  8  7  3  9  9  5  1  9  2  6
+Спиридов Тереньтьев           4  7  7  3  10 9  7  2  10 9  8  1
+Станислав Трердолобов         8  1  6  1  4  1  10 8  8  1  8  8
