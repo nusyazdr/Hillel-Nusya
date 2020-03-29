@@ -4,15 +4,40 @@
 увеличения счетчика на 1, возвращения текущего значения.
 """
 
-name = input('Введите имя файла: ')
-file = open('{}.txt'.format(name), 'w', encoding='utf-8')
+class Counter(object):
 
-while True:
-    text = input('Введите строку, пустой ввод для выхода: ')
-    file.write(text)
-    file.write('\n')
-    if not text:
-        break
-file.close()
+    def __init__(self):
+        self.min = 0
+        self.max = 100
+        self.value = 0
+
+    def set_max(self, max_in):
+        self.max = max_in
+
+    def set_min(self, min_in):
+        self.min = min_in
+
+    def increase(self):
+        self.value += 1
+        if self.value < self.min:
+            self.value = self.min
+        if self.value > self.max:
+            self.value = self.max
+
+    def get_value(self):
+        return self.value
+
+Cnt = Counter()
+
+Cnt.set_max(10000)
+Cnt.set_min(50)
+
+for i in range(6001):
+    Cnt.increase()
+
+print(Cnt.get_value())
+
+
+ 
 
 
