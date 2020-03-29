@@ -4,7 +4,7 @@
 увеличения счетчика на 1, возвращения текущего значения.
 """
 
-class Counter(object):
+class Counter:
 
     def __init__(self):
         self.min = 0
