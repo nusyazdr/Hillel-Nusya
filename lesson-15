@@ -10,6 +10,7 @@ class Counter:
         self.min = 0
         self.max = 100
         self.value = 0
+        self.step = 1
 
     def set_max(self, max_in):
         self.max = max_in
@@ -17,8 +18,10 @@ class Counter:
     def set_min(self, min_in):
         self.min = min_in
 
-    def increase(self):
-        self.value += 1
+    def increase(self, step_in=1):
+        if step_in !=  self.step:
+            self.step = step_in
+        self.value += self.step
         if self.value < self.min:
             self.value = self.min
         if self.value > self.max:
@@ -32,11 +35,95 @@ Cnt = Counter()
 Cnt.set_max(10000)
 Cnt.set_min(50)
 
-for i in range(6001):
+for i in range(3000):
     Cnt.increase()
 
 print(Cnt.get_value())
 
+
+"""
+2. Создать класс, описывающий группу студентов - `Group`.
+Данный класс хранит студентов в виде списка объектов `Student`
+также реализованного в виде соответствующего класса.
+В классах реализовать необходимай набор атрибутов 
+(Например класс `Student` должен иметь атрибуты `name`, `age`, `grades`),
+а так же необходимый набор методов экземпляра для работы с этими экземплярами.
+"""
+
+
+class Student:
+    def __init__(self, name_in='', age_in=0, grades_in=[]):
+        self.name = name_in
+        self.age = age_in
+        self.grades = grades_in
+
+    def get_name(self):
+        return self.name
+
+    def get_age(self):
+        return self.age
+
+    def get_grades(self):
+        return self.grades
+
+    def get_avg_grade(self):
+        count = 0
+        su = 0
+        for grade in self.grades:
+            su += grade
+            count += 1
+        return su/count
+
+    def set_name(self, name_in):
+        self.name = name_in
+
+    def set_age(self, age_in):
+        self.age = age_in
+
+    def set_grades(self, grades_in):
+        self.grades = grades_in
+
+class Group:
+    def __init__(self):
+        self.Stud1 = Student('Вася Пупкин', 19, [3, 4, 3, 5])
+        self.Stud2 = Student('Петя Петров', 18, [12, 11, 11, 11])
+        self.Stud3 = Student('Коля Чехин', 20, [12, 11, 10, 8])
+        self.Stud4 = Student('Виталик Петрович', 25, [9, 8, 9, 11])
+        self.stud_list = []
+        self.stud_list.append(self.Stud1)
+        self.stud_list.append(self.Stud2)
+        self.stud_list.append(self.Stud3)
+        self.stud_list.append(self.Stud4)
+
+    def get_avg_grade(self):
+        su = 0
+        count = 0
+        for stud in self.stud_list:
+            for score in stud.grades:
+                su += score
+                count += 1
+        return su/count
+
+    def get_names(self):
+        names = []
+        for stud in self.stud_list:
+            names.append(stud.get_name())
+        return names
+
+Grp = Group()
+print(Grp.get_avg_grade())
+for name in Grp.get_names():
+    print(name)
+print('##################################')
+
+Grp.stud_list[0].set_name('Тестовый Тест')
+Grp.Stud2.set_name('Второй Второй')
+
+for student in Grp.stud_list:
+    print('{} оценки: '.format(student.get_name()), end='')
+    for score in student.get_grades():
+        print('{} '.format(score), end = '')
+    print(' Средняя: {}'.format(student.get_avg_grade()))
 
  
 
