@@ -1,0 +1,131 @@
+"""1. Користувач вводить ім’я. Привітайтесь з ним по імені й зі знаком оклику в кінці.
+"""
+name = input()
+print("Hello, ", name, "!", sep="")
+
+""" 2. Задано 3 числа. Вивести їх суму."""
+a = int(input())
+b = int(input())
+c = int(input())
+print(a + b + c)
+
+""" 3. Дано число. Вивести попереднє й наступне відносного нього."""
+a = int(input())
+print("The next number for the number ", a, " is ", a+1, sep="")
+print('The previous number for the number ', a, " is ", a-1, sep="")
+
+""" 4. Знайти сторону квадрата по його площі."""
+import math
+s = int(input())
+print(math.sqrt(s))
+
+""" 5. Задано 3 сторони трикутника. Знайти його периметр і площу."""
+import math
+a = int(input())
+b = int(input())
+c = int(input())
+p = a+b+c
+print("P =", p)
+print("S =", math.sqrt(p/2*(p-a)*(p-b)*(p-c)))
+
+""" 6. Дано розмір кредиту й одноразові відсотки по ньому. Знайти загальну суму з відсотками й розмір переплати."""
+a = int(input())
+b = int(input())
+print(a + ((a * b)/100))
+print((a * b)/100)
+
+""" 7. Реалізуйте простий калькулятор, що отримує два числа й виводить
+ результати застосування стандартних математичних операцій над ними."""
+a = int(input())
+b = int(input())
+print("{} + {} = {}".format(a, b, a+b))
+print("{} - {} = {}".format(a, b, a-b))
+print("{} * {} = {}".format(a, b, a*b))
+print("{} / {} = {}".format(a, b, a/b))
+
+""" 8. Дано два числа, що задають інтервал. 
+Згенерувати й вивести два випадкових числа у вказаном
+ інтервалі -- ціле й раціональне."""
+import random
+a = int(input())
+b = int(input())
+print(random.randrange(a, b))
+print(random.uniform(a, b))
+
+""" 9. Дано 2 числа. Вивести меньше з них."""
+a = int(input())
+b = int(input())
+if a > b:
+    print(b)
+elif b > a:
+    print(a)
+else:
+    print("a = b")
+
+""" 10. Реалізувати функцію sign(x)"""
+a = int(input())
+if a > 0:
+    print("1")
+elif a < 0:
+    print("-1")
+elif a == 0:
+    print("0")
+
+""" 11. Реалізуйте ще один простий калькулятор,
+ що отримує два числа й операцію і виводить результат виконання 
+ операції над введеними значеннями. Допустимі операції: + - * /"""
+a = int(input())
+b = int(input())
+d = input()
+if d == "+":
+    print(a + b)
+elif d == "-":
+    print(a - b)
+elif d == "*":
+    print(a * b)
+elif d == "/":
+    print(a / b)
+
+""" 12. Дано коефіцієнти a, b, c квадратного рівняння ax^2+bx+c=0. Знайти корені рівняння"""
+import math
+a = int(input())
+b = int(input())
+c = int(input())
+d = b**2 - 4*a*c
+x1 = (-b + math.sqrt(d))/(a * 2)
+x2 = (-b - math.sqrt(d))/(a * 2)
+print(x1, x2)
+
+""" 13. Пакет мобільного зв’язку передбачає 100 хвилин і 30 смс на місяць 
+при фіксованій абонплаті у 30 гривень. Надалі дзвінки тарифікуються по 30 
+копійок за хвилину, а смс по 25 копійок за одиницю.
+Дано кількість хвилин й смс по номеру за місяць.
+Розрахувати загальну вартість послуг."""
+
+min = int(input())
+sms = int(input())
+if min <= 100 and sms <= 30:
+    print("30")
+elif min >= 100 or sms >= 30:
+    s1 = (min - 100) * 30
+    s2 = (sms - 30) * 25
+    print((3000 + s1 + s2)/100)
+
+""" 14. Дано одну літеру. Визначити чи є вона голосною або приголосною."""
+x = input()
+if x == "a" or x == "e" or x == "i" or x == "o" or x == "u":
+    print("YES")
+else:
+    print("NO")
+
+""" 15. Дано довжини трьох сторін трикутника. 
+Визначити чи є трикутник рівностороннім або рівнобедреним."""
+a = int(input())
+b = int(input())
+c = int(input())
+if a == b == c:
+    print("Equilateral")
+elif a == b or a == c or b == c:
+    print("Isosceles")
+else:
+    print("No equal sides")
