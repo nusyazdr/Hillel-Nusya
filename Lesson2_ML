@@ -1,0 +1,236 @@
+""" 1. Написати програму, яка зчитує число, виводить його квадратний корінь
+ і приймає наступне число. Програма повинна припинити роботу коли їй буде
+  введено від’ємне число.
+"""
+import math
+while True:
+    b = int(input())
+    if b >= 0:
+        print("√", b, ' = ', math.sqrt(b), sep='')
+    else:
+        break
+
+
+""" 2. Дано число N і N чисел. Вивести максимум серед введених чисел."""
+
+n = int(input("Line length: "))
+m = int(input('Next number: '))
+for z in range(n - 1):
+    t = int(input("Next number: "))
+    if t > m:
+        m = t
+print(m)
+
+
+""" 3. Дано знак “+” або “*”, число N і N чисел. 
+Вивести суму або добуток введених чисел залежно від заданого знаку."""
+
+n = int(input("Line length: "))
+s = input('Enter "+" or "*": ')
+sum = 0
+mult = 1
+i = 0
+while i != n:
+    t = int(input("Next number: "))
+    n -= 1
+    if s == "+":
+        sum += t
+
+    elif s == '*':
+        mult *= t
+if s == "+":
+    print(sum)
+elif s == "*":
+    print(mult)
+
+""" 4. Дано число N. Вивести перші N чисел Фібоначчі."""
+
+n = int(input())
+a, b = 1, 1
+print("1", "1", end=" ")
+for z in range(n - 2):
+    a, b = b, a+b
+    print(b, end=" ")
+
+""" 5. Дано число N. Вивести послідовність чисел Фібоначчі, що менші від N."""
+
+n = int(input())
+a, b = 1, 1
+print("1", "1", end=" ")
+for z in range(n - 2):
+    a, b = b, a+b
+    if b < n:
+        print(b, end=" ")
+
+""" 6. Написати програму, що будує таблицю відповідності 
+між градусами за Цельсієм і Фаренгейтом.
+Дано початкове значення у градусах Цельсія, кінцеве значення і крок.
+Вивести таблицю відповідностей."""
+
+n = int(input())
+m = int(input())
+s = int(input())
+for z in range(n, m, s):
+    print(z, '-', z * (9/5) + 32)
+""" 7. Дано число N. Після чого в порядку обходу вводяться N
+ пар координат многокутника на площині.
+ Знайти периметр цього многокутника."""
+
+import math
+n = int(input("Number of corners: "))
+lst = list()
+i = 0
+while i != n:
+    point = []
+    x = int(input("Next number X: "))
+    point.append(x)
+    y = int(input("Next number Y: "))
+    point.append(y)
+    lst.append(point)
+    i += 1
+
+perimeter = 0
+print(lst)
+
+for i in range(len(lst)-1):
+    perimeter += math.sqrt((lst[i+1][0]-lst[i][0])**2 + (lst[i+1][1]-lst[i][1])**2)
+
+perimeter += math.sqrt((lst[-1][0]-lst[0][0])**2 + (lst[-1][1]-lst[0][1])**2)
+print(perimeter)
+
+""" 8. Дано число N і список з N чисел. 
+Для кожного числа зі списку вивести його відношення до середнього
+ арифметичного цього списку (менше, дорівнює, більше)."""
+
+n = int(input())
+l = []
+s = 0
+for z in range(n):
+    t = int(input())
+    l.append(t)
+    s = t + s
+s2 = s/len(l)
+for z in range(len(l)):
+    if l[z] > s2:
+        print(l[z], '>', s2)
+    elif l[z] < s2:
+        print(l[z], '<', s2)
+    elif l[z] == s2:
+        print(l[z], '=', s2)
+
+""" 9. Дано число N і список з N чисел. 
+Вивести всі числа, що більші від обох своїх сусідніх у списку."""
+
+n = int(input())
+l = []
+for z in range(n):
+    t = int(input())
+    l.append(t)
+for z in range(1, len(l) - 1):
+    if l[z-1] < l[z] > l[z+1]:
+        print(l[z])
+
+""" 10. Дано число N і список з N чисел. Вивести список у зворотному порядку."""
+n = int(input())
+l = []
+for z in range(n):
+    t = int(input())
+    l.append(t)
+print(l)
+print(l[::-1])
+
+""" 11. Дано число N і список з N чисел. Далі на вхід задаються пари чисел A,B>=0.
+ Для кожної пари вивести значення списку з індексами від A включно до B не включно.
+ Завершити роботу коли буде введено два нулі. Врахувати випадок коли A>B."""
+
+n = int(input("N: "))
+l = []
+for z in range(n):
+    t = int(input())
+    l.append(t)
+print("L: ", l)
+a = 1
+b = 1
+while True:
+    if a != 0 and b != 0:
+        a = int(input("A: "))
+        b = int(input("B: "))
+        if a > b:
+            print(l[b + 1:a + 1])
+        else:
+            print(l[a:b])
+        if a == 0 and b == 0:
+            break
+
+
+""" 12. Дано число N і список з N чисел. Вивести всі числа, що зустрічаються у списку лише раз."""
+
+n = int(input("N:"))
+l = []
+for z in range(n):
+    t = int(input())
+    l.append(t)
+print("L: ", l)
+
+for item in l:
+    if l.count(item) == 1:
+        print(item)
+
+""" 13. Дано число N, список з N чисел, число M і далі список з M чисел.
+ Вивести всі числа, які трапляються в обох списках."""
+
+n = int(input("N: "))
+l1 = []
+for z in range(n):
+    t = int(input())
+    l1.append(t)
+m = int(input("M: "))
+l2 = []
+for j in range(m):
+    k = int(input())
+    l2.append(k)
+print("L1: ", l1)
+print("L2: ", l2)
+l1.extend(l2)
+x = list(set(l1))
+print(x)
+
+""" 14. Реалізуйте CRM систему, яка повинна приймати й обробляти запити наступних видів:
+Додати працівника з іменем <name> у систему.
+add
+<name>
+Перевірити чи є працівник з іменем <name> у системі.
+find
+<name>
+Вивести список всіх працівників.
+list
+Видалити працівника з іменем <name> із системи.
+delete
+<name>
+Завершити роботу системи.
+stop
+"""
+l = []
+while True:
+    cmd = input('Введите команду: ')
+    if cmd == "add":
+        name = input("Введите новое имя: ")
+        l.append(name)
+    elif cmd == "find":
+        name = input("Введите искомое имя: ")
+        if l.count(name) > 0:
+            print("Искомое имя есть!")
+        elif l.count(name) == 0:
+            print("Искомое имени нет!")
+    elif cmd == "list":
+        print(l)
+    elif cmd == "delete":
+        name = input("Введите имя для удаления: ")
+        cnt = l.count(name)
+        for d in range(cnt):
+            i = l.index(name)
+            l.pop(i)
+    elif cmd == "stop":
+        break
+print("Действия завершины!")
+
