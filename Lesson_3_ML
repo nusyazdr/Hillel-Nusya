@@ -1,0 +1,206 @@
+""" 1. Дано число N і M. Далі вводяться N рядків по M чисел.
+ Вивести M чисел, що відповідають значенням сум відповідних стовпчиків.
+"""
+n, m = int(input("N: ")), int(input("M: "))
+values = []
+for x in range(n):
+    row = [int(z) for z in input().split()]
+    values.append(row)
+print(values)
+
+for x in range(n):
+    for y in range(m):
+        print(values[x][y], end=" ")
+    print()
+i = 0
+for q in range(len(values) + 1):
+    sum = values[0][i] + values[1][i]
+    i += 1
+    print(sum, end=" ")
+
+""" 2. Дано число N. Створити й вивести двовимірний масив розмірністю N на N,
+ у якого на основній діагоналі розташовані одиниці, а всі інші значення дорівнюють нулю."""
+
+n = int(input("N: "))
+values = []
+for x in range(n):
+    row = [0 for z in range(n)]
+    values.append(row)
+print(values)
+
+for x in range(n):
+    for y in range(n):
+        if x == y:
+            values[x][y] = 1
+        print(values[x][y], end=" ")
+    print()
+
+""" 3. Дано матрицю N на M. Вивести транспоновану матрицю."""
+n, m = int(input("N: ")), int(input("M: "))
+values = []
+for x in range(n):
+    row = [int(z) for z in input().split()]
+    values.append(row)
+print(values)
+
+for x in range(n):
+    for y in range(m):
+        print(values[x][y], end=" ")
+    print()
+
+for x in range(m):
+    for y in range(n):
+        print(values[y][x], end=" ")
+    print()
+
+""" 4. Написати функцію для знаходження відстані між двома
+ точками в просторі: (x1, y1, z1) і (x2, y2, z2)."""
+import math
+
+def mod(x1, y1, z1, x2, y2, z2):
+    t = math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)
+    return t
+
+x1, y1, z1 = int(input("X1: ")), int(input("Y1: ")), int(input("Z1: "))
+x2, y2, z2 = int(input("X2: ")), int(input("Y2: ")), int(input("Z2: "))
+
+print(mod(x1, y1, z1, x2, y2, z2))
+
+""" 5. Написати функцію, яка отримує список натуральних чисел і повертає новий список,
+ в якому містяться лише парні числа з початкового списку."""
+
+def even(n):
+    if n % 2 == 0:
+        return True
+    else:
+        return False
+
+m = int(input("M: "))
+l = []
+l1 = []
+for z in range(m):
+    t = int(input())
+    l.append(t)
+for z in range(len(l)):
+    if even(l[z]) == True:
+        l1.append(l[z])
+print(l1)
+
+""" 6. Написати набір функцій для розрахунку наступних характеристик 
+кола: діаметр, довжина й площа. Коло задається радіусом. """
+
+import math
+
+def diameter (r):
+    diameter = r * 2
+    return diameter
+
+def circumference (r):
+    circumference = 2 * r * math.pi
+    return circumference
+
+def area (r):
+    area = r**2 * math.pi
+    return area
+
+x = int(input("R: "))
+
+print("d = ", diameter(x))
+print("c = ", circumference(x))
+print("s = ", area(x))
+
+""" 7. Написати функцію, яка використовує функції із попереднього завдання,
+ і для заданого кола повертає відформатований рядок з його описом."""
+
+import math
+
+def diameter (r):
+    diameter = r * 2
+    return diameter
+
+def circumference (r):
+    circumference = 2 * r * math.pi
+    return circumference
+
+def area (r):
+    area = r**2 * math.pi
+    return area
+
+x = int(input("Enter radius of the circle: "))
+
+print("Diameter of the circle =  ", round(diameter(x), 2), "units")
+print("Circumference of the circle =", round(circumference(x), 2), "units")
+print("Area of the circle =", round(area(x), 2), "sq.units")
+
+"""8.Написати функцію, що отримує два відсортованих списки
+ і об'єднує їх у новий відсортований список."""
+def sortlist (a, b):
+    a.extend(b)
+    a.sort()
+    return a
+
+n = int(input("n:"))
+l = []
+for z in range(n):
+    t = input("Вводите элемент первого списка: ")
+    l.append(t)
+print(l)
+
+m = int(input("m:"))
+l2 = []
+for z in range(n):
+    p = input("Вводите элемент второго списка: ")
+    l2.append(p)
+print(l2)
+
+print(sortlist(l, l2))
+
+"""9. Написати програму, що для заданого списку чисел
+ визначає скільки в ньому унікальних значень."""
+
+n = int(input("К-во элементов в списке:"))
+l = []
+for z in range(n):
+    t = int(input("Введите элемент списка: "))
+    l.append(t)
+
+print("К-во уникальных обьектов: ", len(set(l)))
+
+
+""" 10. Написати програму, що інтерактивно отримує на ввід числа 
+і для кожного повідомляє чи зустрічалося воно на вводі вже раніше."""
+
+n = set()
+print("Для остановки введите 0!")
+while True:
+    t = int(input("Вводите элемент множества:"))
+    if t in n:
+        print("Данный элемент есть во множестве.")
+    elif t == 0:
+        break
+    else:
+        print("Данного элемента нет во множестве.")
+    n.add(t)
+    print(n)
+
+""" 11. Написати програму, що дозволить підтримувати список електронних адрес для розсилки.
+ Програма повинна дозволяти додавати, перевіряти наявність і видаляти електронні адреси."""
+
+n = set()
+while True:
+    cmd = input('Введите команду: ')
+    if cmd == "add":
+        name = input("Введите новый адрес: ")
+        n.add(name)
+    elif cmd == "find":
+        name = input("Введите искомый адрес: ")
+        if name in n:
+            print("Искомый адрес есть!")
+        elif name not in n:
+            print("Искомого адреса нет!")
+    elif cmd == "delete":
+        name = input("Введите адрес для удаления: ")
+        n.remove(name)
+    elif cmd == "stop":
+        break
+print("Действия завершины!")
