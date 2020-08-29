@@ -128,9 +128,9 @@ def area (r):
 
 x = int(input("Enter radius of the circle: "))
 
-print("Diameter of the circle =  ", round(diameter(x), 2), "units")
-print("Circumference of the circle =", round(circumference(x), 2), "units")
-print("Area of the circle =", round(area(x), 2), "sq.units")
+print("Diameter of circle = {}, units".format(round(diameter(x), 2)))
+print("Circumference of the circle = {}, units".format(round(circumference(x), 2)))
+print("Area of the circle = {}, sq.units".format(round(area(x), 2)))
 
 """8.Написати функцію, що отримує два відсортованих списки
  і об'єднує їх у новий відсортований список."""
