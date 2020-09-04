@@ -1,0 +1,192 @@
+"""1. Написати програму, що для заданого списку слів підрахує
+кількість входжень кожного зі слів у цей список."""
+
+n = int(input("N: "))
+l1 = []
+for z in range(n):
+    t = input()
+    l1.append(t)
+d = {}
+for z in l1:
+    if z not in d:
+        d[z] = 1
+    else:
+        d[z] += 1
+print(d)
+
+"""2.Телефонний довідник.
+Напишіть програму, що буде реалізовувати простий телефонний довідник. 
+При запуску програми довідник порожній. Далі у користувача повинна бути
+ можливість інтерактивно виконувати наступні операції, вводячи їх з клавіатури:
+- insert <Name> <Number> - додати в телефонний довідник новий запис про
+ користувача і його номер телефону.
+- delete <Name> - видалити з телефонного довідника користувача і його номер телефону.
+- get <Name> - дізнатися номер телефону по імені користувача.
+<Name> - рядок із символів англійського алфавіту в верхньому або
+ нижньому регістрі без роздільників.
+<Number> - рядок з цифр.
+Імена не повторюються. Кожному імені може відповідати рівно один номер телефону.
+ Зберігати дані між запусками програми не потрібно.
+ """
+
+l = []
+while True:
+    cmd = input('Введите команду: ')
+    if cmd == "insert":
+        name = input("Введите имя нового пользователя: ")
+        l.append(name)
+        number = input("Введите номер нового пользователя: ")
+        l.append(number)
+        d = {l[i]: l[i + 1] for i in range(0, len(l), 2)}
+        print(d)
+    elif cmd == "delete":
+        n = input("Введите имя для удаления: ")
+        del d[n]
+        print(d)
+    elif cmd == "get":
+        n = input("Введите имя для поиска номера: ")
+        if n in d:
+            print(d.get(n))
+        else:
+            print("Not found")
+    elif cmd == "stop":
+        break
+print("Действия завершины!")
+
+""" 6. Переробити попереднє завдання з телефонним довідником 
+із застосуванням класу для представленням довідника."""
+
+#  файл crm_core.py
+
+class CRM(object):
+
+    def __init__(self):
+        self.base = {}
+        self.lst = []
+
+    def insert(self, name, phone):
+        self.lst.append(name)
+        self.lst.append(phone)
+        self.base = {self.lst[i]: self.lst[i + 1] for i in range(0, len(self.lst), 2)}
+        print(self.base)
+
+    def delete(self, name):
+        del self.base[name]
+        print(self.base)
+
+    def get(self, name):
+        if name in self.base:
+            print(self.base.get(name))
+        else:
+            print("Not found")
+# конец файла crm_core.py
+
+from crm_core import CRM
+
+crm1 = CRM()
+
+while True:
+    cmd = input('Введите команду: ')
+    if cmd == "insert":
+        name = input("Введите имя нового пользователя: ")
+        number = input("Введите номер нового пользователя: ")
+        crm1.insert(name, number)
+    elif cmd == "delete":
+        name = input("Введите имя для удаления: ")
+        crm1.delete(name)
+    elif cmd == "get":
+        name = input("Введите имя для поиска номера: ")
+        crm1.get(name)
+    elif cmd == "stop":
+        break
+print("Действия завершины!")
+
+""" 7. Створити клас для роботи з трикутниками.
+ Форму представлення і допустимі операції вибрати самостійно."""
+# файл triag.py
+
+import math
+
+class Triangle(object):
+
+    def __init__(self, apex1x, apex2x, apex3x, apex1y, apex2y, apex3y):
+        self.perim = 0
+        self.s = 0
+        self.points = []
+        point1 = []
+        point1.append(apex1x)
+        point1.append(apex1y)
+        point2 = []
+        point2.append(apex2x)
+        point2.append(apex2y)
+        point3 = []
+        point3.append(apex3x)
+        point3.append(apex3y)
+        self.points.append(point1)
+        self.points.append(point2)
+        self.points.append(point3)
+        print(self.points)
+
+    def perimeter(self):
+        for i in range(len(self.points) - 1):
+            self.perim += math.sqrt((self.points[i + 1][0] - self.points[i][0]) ** 2 + (self.points[i + 1][1] - self.points[i][1]) ** 2)
+
+        self.perim += math.sqrt((self.points[-1][0] - self.points[0][0]) ** 2 + (self.points[-1][1] - self.points[0][1]) ** 2)
+        print("Perimeter = ", self.perim)
+
+    def area(self):
+        if self.perim == 0:
+            self.perimeter()
+        pperim = self.perim / 2
+        a = math.sqrt((self.points[1][0] - self.points[0][0]) ** 2 + (self.points[1][1] - self.points[0][1]) ** 2)
+        b = math.sqrt((self.points[2][0] - self.points[1][0]) ** 2 + (self.points[2][1] - self.points[1][1]) ** 2)
+        c = math.sqrt((self.points[0][0] - self.points[2][0]) ** 2 + (self.points[0][1] - self.points[2][1]) ** 2)
+        self.s = math.sqrt(pperim * (pperim - a) * (pperim - b) * (pperim - c))
+        print("Area = ", self.s)
+
+    def type(self):
+        a = math.sqrt((self.points[1][0] - self.points[0][0]) ** 2 + (self.points[1][1] - self.points[0][1]) ** 2)
+        b = math.sqrt((self.points[2][0] - self.points[1][0]) ** 2 + (self.points[2][1] - self.points[1][1]) ** 2)
+        c = math.sqrt((self.points[0][0] - self.points[2][0]) ** 2 + (self.points[0][1] - self.points[2][1]) ** 2)
+        if a**2 < b**2 + c**2:
+            print("Acute-angled triangle")
+        elif b**2 == c**2 + a**2:
+            print("Right triangle")
+        elif a**2 > b**2 + c**2:
+            print("Obtuse triangle")
+
+    def angles(self):
+        a = math.sqrt((self.points[1][0] - self.points[0][0]) ** 2 + (self.points[1][1] - self.points[0][1]) ** 2)
+        b = math.sqrt((self.points[2][0] - self.points[1][0]) ** 2 + (self.points[2][1] - self.points[1][1]) ** 2)
+        c = math.sqrt((self.points[0][0] - self.points[2][0]) ** 2 + (self.points[0][1] - self.points[2][1]) ** 2)
+        A = math.acos((b**2 + c**2 - a**2) / (2 * b * c))
+        B = math.acos((a**2 + c**2 - b**2) / (2 * a * c))
+        C = math.acos((a**2 + b**2 - c**2) / (2 * a * b))
+        print("< A = ", A * (180 / math.pi))
+        print("< B = ", B * (180 / math.pi))
+        print("< C = ", C * (180 / math.pi))
+
+#  конец файлa triag.py
+
+from triag import Triangle
+
+apex1x = int(input("x1 = "))
+apex1y = int(input("y1 = "))
+apex2x = int(input("x2 = "))
+apex2y = int(input("y2 = "))
+apex3x = int(input("x3 = "))
+apex3y = int(input("y3 = "))
+abc = Triangle(apex1x, apex2x, apex3x, apex1y, apex2y, apex3y)
+while True:
+    cmd = input('Введите команду: ')
+    if cmd == "perimeter":
+        abc.perimeter()
+    elif cmd == "area":
+        abc.area()
+    elif cmd == "type":
+        abc.type()
+    elif cmd == "angles":
+        abc.angles()
+    elif cmd == "stop":
+        break
+print("Действия завершины!")
