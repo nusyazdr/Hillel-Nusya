@@ -1,0 +1,88 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import sklearn.linear_model as linear_model
+
+advertising_data = pd.read_csv("advertising.csv", index_col=0)
+print(advertising_data)
+
+tvlist = []
+for index, row in advertising_data.iterrows():
+    if row['TV'] >= 0:
+        tvlist.append(row['TV'])
+
+radiolist = []
+for index, row in advertising_data.iterrows():
+    if row['radio'] >= 0:
+        radiolist.append(row['radio'])
+
+newspaperlist = []
+for index, row in advertising_data.iterrows():
+    if row['newspaper'] >= 0:
+        newspaperlist.append(row['newspaper'])
+
+
+saleslist = []
+for index, row in advertising_data.iterrows():
+    if row['sales'] >= 0:
+        saleslist.append(row['sales'])
+
+
+pirscor1 = np.corrcoef(tvlist, saleslist)[0, 1]
+pirscor2 = np.corrcoef(radiolist, saleslist)[0, 1]
+pirscor3 = np.corrcoef(saleslist, saleslist)[0, 1]
+
+print("Корреляция Пирсона между стоимостью реклами на TV и продажами - ", round(pirscor1, 4))
+print("Корреляция Пирсона между стоимостью реклами по радио и продажами - ", round(pirscor2, 4))
+print("Корреляция Пирсона между стоимостью реклами в газете и продажами - ", round(pirscor3, 4))
+
+plt.scatter(advertising_data[['TV']], advertising_data[["sales"]])
+
+tv = advertising_data[['TV']]
+sales = advertising_data[["sales"]]
+
+linear_regression = linear_model.LinearRegression()
+linear_regression.fit(X=tv, y=sales)
+
+print(linear_regression.coef_)
+print(linear_regression.intercept_)
+
+regression_line_points = linear_regression.predict(X=tv)
+
+plt.plot(tv, regression_line_points)
+
+plt.show()
+
+plt.scatter(advertising_data[['radio']], advertising_data[["sales"]])
+
+radio = advertising_data[['radio']]
+sales = advertising_data[["sales"]]
+
+linear_regression = linear_model.LinearRegression()
+linear_regression.fit(X=radio, y=sales)
+
+print(linear_regression.coef_)
+print(linear_regression.intercept_)
+
+regression_line_points = linear_regression.predict(X=radio)
+
+plt.plot(radio, regression_line_points)
+
+plt.show()
+
+plt.scatter(advertising_data[['newspaper']], advertising_data[["sales"]])
+
+newspaper = advertising_data[['newspaper']]
+sales = advertising_data[["sales"]]
+
+linear_regression = linear_model.LinearRegression()
+linear_regression.fit(X=newspaper, y=sales)
+
+print(linear_regression.coef_)
+print(linear_regression.intercept_)
+
+regression_line_points = linear_regression.predict(X=newspaper)
+
+plt.plot(newspaper, regression_line_points)
+
+plt.show()
