@@ -3,6 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sklearn.linear_model as linear_model
 
+
+def model_to_string(model, labels, precision=4):
+    model_str = "{} = ".format(labels[-1])
+    for z in range(len(labels) - 1):
+        model_str += "{} * {} + ".format(round(model.coef_.flatten()[z], precision), labels[z])
+    model_str += "{}".format(round(model.intercept_[0], precision))
+    return model_str
+
+
 advertising_data = pd.read_csv("advertising.csv", index_col=0)
 print(advertising_data)
 
@@ -30,7 +39,7 @@ for index, row in advertising_data.iterrows():
 
 pirscor1 = np.corrcoef(tvlist, saleslist)[0, 1]
 pirscor2 = np.corrcoef(radiolist, saleslist)[0, 1]
-pirscor3 = np.corrcoef(saleslist, saleslist)[0, 1]
+pirscor3 = np.corrcoef(newspaperlist, saleslist)[0, 1]
 
 print("Корреляция Пирсона между стоимостью реклами на TV и продажами - ", round(pirscor1, 4))
 print("Корреляция Пирсона между стоимостью реклами по радио и продажами - ", round(pirscor2, 4))
@@ -86,3 +95,35 @@ regression_line_points = linear_regression.predict(X=newspaper)
 plt.plot(newspaper, regression_line_points)
 
 plt.show()
+
+
+ad_data = advertising_data[["TV", "radio", "newspaper"]]
+sales_data = advertising_data[["sales"]]
+
+linear_regression = linear_model.LinearRegression()
+linear_regression.fit(ad_data, sales_data)
+
+labels = advertising_data.columns.values
+print(model_to_string(linear_regression, labels))
+
+ad_data2 = advertising_data[["TV"]]
+
+linear_regression = linear_model.LinearRegression()
+linear_regression.fit(ad_data2, sales_data)
+print("sales_TV = ", round(linear_regression.coef_[0][0], 4), "* TV")
+
+ad_data3 = advertising_data[["radio"]]
+
+linear_regression = linear_model.LinearRegression()
+linear_regression.fit(ad_data3, sales_data)
+print("sales_radio = ", round(linear_regression.coef_[0][0], 4), "* radio")
+
+ad_data4 = advertising_data[["newspaper"]]
+
+linear_regression = linear_model.LinearRegression()
+linear_regression.fit(ad_data4, sales_data)
+print("sales_newspaper = ", round(linear_regression.coef_[0][0], 4), "* newspaper")
+
+""" При построении регрессивной модели для каждого вида рекламы было выявлено что коэффициент 
+вырос по сравнению с общей регрессивной моделью, 
+т. е градиент увеличился при тех же затратах на одну единицу рекламы ."""
