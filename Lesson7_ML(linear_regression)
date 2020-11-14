@@ -12,7 +12,7 @@ muscle_mass_df.sort_values(by="training_time", inplace=True)  # отсортир
 df_train, df_test = train_test_split(muscle_mass_df, train_size=0.7, test_size=0.3, random_state=10) # разбиваем данные для обучения и теста (70/30)
 
 X_train = df_train['training_time'] #список данных для тренировки
-X_train = X_train.values.reshape(-1, 1)#преобразовуем список в столбец от первого до последнеге(-1)
+X_train = X_train.values.reshape(-1, 1)#преобразовуем список в столбец от первого до последнеге(-1) и убирает нумерацию строк
 y_train = df_train['muscle_mass']
 X_test = df_test['training_time']
 X_test = X_test.values.reshape(-1, 1)
