@@ -20,7 +20,7 @@ y_test = df_test['muscle_mass']
 
 test_MSE_scores = []
 
-for degree in range(1, 20):
+for degree in range(1, 10):
     model = make_pipeline(PolynomialFeatures(degree), LinearRegression()) #класс Pipeline функционирует как составной (конвейерный) классификатор
 
     model.fit(X_train, y_train)
