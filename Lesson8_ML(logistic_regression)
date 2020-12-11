@@ -1,0 +1,54 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import sklearn.linear_model as sk_linear_models
+import sklearn.metrics as sk_metrics
+
+qualifies_single_grade = pd.read_csv("linear_vs_logistic.csv")
+qualifies_single_grade.sort_values(by=["grade"], inplace=True)
+
+qualified_candidates = qualifies_single_grade[qualifies_single_grade["qualifies"] == 1]
+unqualified_candidates = qualifies_single_grade[qualifies_single_grade["qualifies"] == 0]
+
+X = qualifies_single_grade[["grade"]]
+y = qualifies_single_grade["qualifies"]
+
+print("Линейная регрессия :")
+linear_model = sk_linear_models.LinearRegression()
+linear_model.fit(X, y)
+
+linear_model_value = []
+for i in linear_model.predict(X):
+    linear_model_value.append(int(round(i)))
+
+linear_confusion_matrix = sk_metrics.confusion_matrix(y, linear_model_value)
+print(linear_confusion_matrix)
+print(f"Accuracy:{sk_metrics.accuracy_score(y, linear_model_value)}") # точность - то на сколько часто модель делает верныее предсказания
+#Accuracy - отношение правильных к всевозможным
+print(f"Precision:{sk_metrics.precision_score(y, linear_model_value)}") # меткость - если модель говорит "ДА", то на сколько часто она права
+print(f"Recall:{sk_metrics.recall_score(y, linear_model_value)}")# отзыв - если ответ действительно ДА, то насколько часто модель говорит ДА
+print(f"Errors Rate:{1 - sk_metrics.accuracy_score(y, linear_model_value)}") # сколько предсказаний сделано неправильно
+
+plt.scatter(qualified_candidates["grade"], qualified_candidates["qualifies"], color="g")
+plt.scatter(unqualified_candidates["grade"], unqualified_candidates["qualifies"], color="r")
+plt.plot(X, linear_model_value)
+plt.plot(X, linear_model.predict(X))
+plt.show()
+
+print("Логистическая регрессия :")
+logistic_model = sk_linear_models.LogisticRegression()
+logistic_model.fit(X, y)
+
+logistic_model_value = logistic_model.predict(X)
+
+logistic_confusion_matrix = sk_metrics.confusion_matrix(y, logistic_model_value)
+print(logistic_confusion_matrix)
+print(f"Accuracy:{sk_metrics.accuracy_score(y, logistic_model_value)}")
+print(f"Precision:{sk_metrics.precision_score(y, logistic_model_value)}")
+print(f"Recall:{sk_metrics.recall_score(y, logistic_model_value)}")
+print(f"Errors Rate:{1 - sk_metrics.accuracy_score(y, logistic_model_value)}")
+
+plt.scatter(qualified_candidates["grade"], qualified_candidates["qualifies"], color="g")
+plt.scatter(unqualified_candidates["grade"], unqualified_candidates["qualifies"], color="r")
+plt.plot(X, logistic_model_value)
+plt.plot(X, logistic_model.predict_proba(X)[:, 1])
+plt.show()
